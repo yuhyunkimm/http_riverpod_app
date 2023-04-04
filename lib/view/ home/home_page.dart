@@ -13,7 +13,9 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // 아래와 같이 땡겨 온다
     PostController pCon = ref.read(postController);
+    // watch 하고 싶은 곳에서만
     HomePageModel? hpm = ref.watch(homePageViewModel);
 
     return Scaffold(
@@ -25,6 +27,7 @@ class HomePage extends ConsumerWidget {
                   : CircularProgressIndicator()),
           ElevatedButton(
             onPressed: () {
+              // 컨트롤러가 레파지토리 요청
               pCon.findPosts();
             },
             child: Text("페이지로드"),

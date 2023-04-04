@@ -19,6 +19,10 @@ final homePageViewModel =
 // 통신요청은 controller에서 해준다
 class HomePageViewModel extends StateNotifier<HomePageModel?> {
   HomePageViewModel(super.state);
+
+  void init(List<PostDto> postDtoList){
+    state = HomePageModel(posts: postDtoList);
+  }
 }
 
 // 창고 데이터 (homepage에 필요한 데이터)
