@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:http_riverpod_app/dto/post_respose_dto.dart';
+import 'package:http_riverpod_app/dto/post/post_respose_dto.dart';
 
 // homepage내 사용하는 것은 의미 있는 이름으로 사용
 // homepagepostdto -> 통신 데이터

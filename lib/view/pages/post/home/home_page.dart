@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http_riverpod_app/controller/post_controller.dart';
-import 'package:http_riverpod_app/dto/post_respose_dto.dart';
-import 'package:http_riverpod_app/repository/post_repository.dart';
-import 'home_page_view_model.dart';
+import 'package:http_riverpod_app/dto/post/post_respose_dto.dart';
+import 'package:http_riverpod_app/view/pages/post/home/home_page_view_model.dart';
+
+
 
 /*
 * consumerwidget

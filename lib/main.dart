@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:http_riverpod_app/view/%20home/home_page.dart';
+import 'package:http_riverpod_app/view/pages/post/home/home_page.dart';
 
 void main() {
   runApp(ProviderScope(
