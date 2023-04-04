@@ -2,8 +2,10 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http_riverpod_app/dto/post/post_respose_dto.dart';
-import 'package:http_riverpod_app/model/post_repository.dart';
-import 'package:http_riverpod_app/view/pages/post/home/home_page_view_model.dart';
+import 'package:http_riverpod_app/model/post/post.dart';
+import 'package:http_riverpod_app/model/post/post_repository.dart';
+
+import 'package:http_riverpod_app/view/pages/post/home/post_home_page_view_model.dart';
 
 
 
@@ -20,8 +22,8 @@ class PostController{
   PostController(this.ref);
 
   Future<void> findPosts() async {
-    List<PostDto> postDtoList =  await PostRepository().findAll();
-    ref.read(homePageViewModel.notifier).init(postDtoList);
+    List<Post> postDtoList =  await PostRepository().findAll();
+    ref.read(postHomePageProvider.notifier).init(postDtoList);
 
   }
 }

@@ -2,6 +2,7 @@
 
 
 import 'package:http_riverpod_app/dto/post/post_respose_dto.dart';
+import 'package:http_riverpod_app/model/post/post.dart';
 
 class PostRepository {
 // 화면 제어하면 안되고 통신과 파싱 역할만 해야한다
@@ -12,12 +13,12 @@ class PostRepository {
     return _instance;
   }
 
-  Future<List<PostDto>> findAll() {
+  Future<List<Post>> findAll() {
     return Future.delayed(Duration(seconds: 1), () {
       return [
-        PostDto(id: 1, title: "제목1"),
-        PostDto(id: 2, title: "제목2"),
-        PostDto(id: 3, title: "제목3"),
+        Post(id: 1, title: "제목1"),
+        Post(id: 2, title: "제목2"),
+        Post(id: 3, title: "제목3"),
       ];
     });
   }

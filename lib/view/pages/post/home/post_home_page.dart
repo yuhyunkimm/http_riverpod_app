@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http_riverpod_app/controller/post_controller.dart';
-import 'package:http_riverpod_app/dto/post/post_respose_dto.dart';
-import 'package:http_riverpod_app/view/pages/post/home/home_page_view_model.dart';
-
-
+import 'package:http_riverpod_app/model/post/post.dart';
+import 'package:http_riverpod_app/view/pages/post/home/post_home_page_view_model.dart';
 
 /*
 * consumerwidget
@@ -15,21 +13,20 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // 아래와 같이 땡겨 온다
-    PostController pCon = ref.read(postController);
+    PostController pc = ref.read(postController);
     // watch 하고 싶은 곳에서만
-    HomePageModel? hpm = ref.watch(homePageViewModel);
+    PostHomePageModel? pm = ref.watch(postHomePageProvider);
 
     return Scaffold(
       body: Column(
         children: [
           Expanded(
-              child: hpm != null
-                  ? _buildListView(hpm.posts)
-                  : CircularProgressIndicator()),
+              child:
+              pm != null ? _buildListView(pm.posts) : _buildListView([])),
           ElevatedButton(
             onPressed: () {
               // 컨트롤러가 레파지토리 요청
-              pCon.findPosts();
+              pc.findPosts();
             },
             child: Text("페이지로드"),
           )
@@ -38,7 +35,7 @@ class HomePage extends ConsumerWidget {
     );
   }
 
-  ListView _buildListView(List<PostDto> posts) {
+  Widget _buildListView(List<Post> posts) {
     return ListView.builder(
       itemCount: posts.length,
       itemBuilder: (context, index) => ListTile(
