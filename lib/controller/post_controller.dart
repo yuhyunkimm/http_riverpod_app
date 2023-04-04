@@ -26,4 +26,23 @@ class PostController{
     ref.read(postHomePageProvider.notifier).init(postDtoList);
 
   }
+
+  // delete 제외하고 다 돌려 줘야한다
+  Future<void> addPost(String title)  async {
+    Post post = await PostRepository().save(title);
+    // postHomePageProvider.notifier = 창고 찾아 주세요
+    // add 추가
+    ref.read(postHomePageProvider.notifier).add(post);
+  }
+
+  void removePost(int id) async {
+    PostRepository().deleteById(id);
+    ref.read(postHomePageProvider.notifier).remove(id);
+
+  }
+
+  void updatePost(Post post) async {
+    Post postPS = await PostRepository().update(post);
+    ref.read(postHomePageProvider.notifier).update(postPS);
+  }
 }

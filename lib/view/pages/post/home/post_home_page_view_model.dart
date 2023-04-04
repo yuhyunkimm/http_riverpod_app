@@ -24,6 +24,38 @@ class PostHomePageViewModel extends StateNotifier<PostHomePageModel?> {
   void init(List<Post> postDtoList){
     state = PostHomePageModel(posts: postDtoList);
   }
+
+
+  // 추가
+  // 변경감지는 레퍼런스 주소가 감지한다
+  void add(Post post) {
+    List<Post> posts = state!.posts;
+    //posts.add(post);
+    // 정리 연산자 사용 => 깊은 복사가 된다
+    // 깊은 복사할때 => 추가 삭제 수정 검색
+    List<Post> newPosts = [...posts, post];
+    // 조건 : 레퍼런스주소가 같으면 변경이 안된다
+    // new 해준 새로운 레퍼런스는 변경 감지
+    state = PostHomePageModel(posts: newPosts); //레퍼런스가 달라지면 된다(값이 동일해도 다시 그린다)
+  }
+  // 삭제
+  void remove(int id){
+    List<Post> posts = state!.posts;
+    // where 깊은 복사
+    // id가 같을때 return을 false
+    // e.id == id id 검색
+    // where은 검색과 삭제 역할을 한다
+    List<Post> newPosts = posts.where((e) => e.id != id).toList();
+    state = PostHomePageModel(posts: newPosts);
+  }
+
+  // 수정(배열)
+  void update(Post post){
+    List<Post> posts = state!.posts;
+    // e.id와 post.id가 같으면 post를 리턴하고 아니면 e를 리턴해 준다
+    List<Post> newPosts = posts.map((e) => e.id == post.id ? post : e).toList();
+    state = PostHomePageModel(posts: newPosts);
+  }
 }
 
 // 창고 데이터 (homepage에 필요한 데이터)

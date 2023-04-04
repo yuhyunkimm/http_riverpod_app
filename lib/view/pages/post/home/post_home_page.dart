@@ -7,8 +7,8 @@ import 'package:http_riverpod_app/view/pages/post/home/post_home_page_view_model
 /*
 * consumerwidget
 * */
-class HomePage extends ConsumerWidget {
-  const HomePage({Key? key}) : super(key: key);
+class PostHomePage extends ConsumerWidget {
+  const PostHomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -22,14 +22,32 @@ class HomePage extends ConsumerWidget {
         children: [
           Expanded(
               child:
-              pm != null ? _buildListView(pm.posts) : _buildListView([])),
+                  pm != null ? _buildListView(pm.posts) : _buildListView([])),
           ElevatedButton(
             onPressed: () {
               // 컨트롤러가 레파지토리 요청
               pc.findPosts();
             },
             child: Text("페이지로드"),
-          )
+          ),
+          ElevatedButton(
+            onPressed: () {
+              pc.addPost("제목4");
+            },
+            child: Text("한건추가"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              pc.removePost(1);
+            },
+            child: Text("한건삭제"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              pc.updatePost(Post(id: 2, title: "제목 ㅎㅎ"));
+            },
+            child: Text("한건수정"),
+          ),
         ],
       ),
     );
